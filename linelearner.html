@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <title>LineLearner Basic</title>
+  </head>
+  <body>
+    <noscript>broski stop using netscape 1 or enable javascript</noscript>
+    <span id="text"></span><br />
+    <button id="new">Show new line</button>
+    <button id="sub">Subtract line</button>
+    <div>
+      <input
+        type="text"
+        placeholder="Some witty line goes here"
+        id="line"
+        size="50"
+      />
+      <button id="addline">Add Line</button>
+    </div>
+    <script>
+      var lines = [];
+      var linesshown = [];
+      var text = document.getElementById("text");
+      var lineadder = document.getElementById("line");
+      function updatespan() {
+        let result = "";
+        for (let i = 0; i < linesshown.length; i++) {
+          if (i == linesshown.length) {
+            result += linesshown[i];
+            text.innerHTML = result;
+            return;
+          }
+          result += linesshown[i] + "<br>";
+        }
+        text.innerHTML = result;
+      }
+      document.getElementById("new").addEventListener("click", function () {
+        if (linesshown.length == lines.length) {
+          return;
+        }
+        linesshown.push(lines[linesshown.length]);
+        updatespan();
+      });
+      document.getElementById("sub").addEventListener("click", function () {
+        if (linesshown.length == 0) {
+          return;
+        }
+        linesshown.pop();
+        updatespan();
+      });
+      document.getElementById("addline").addEventListener("click", function () {
+        lines.push(line.value);
+        updatespan();
+        line.value = "";
+      });
+    </script>
+  </body>
+</html>
