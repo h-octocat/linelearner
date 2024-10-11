@@ -1,9 +1,12 @@
-SO BASICALLY TO ADD LINES TYPE IN TEXTBOX OR TEXTAREA (SEPERATE BY NEWLINE)
-TO SHOW NEW LINES CLICK SHOW NEW LINE
-CLICK SUBTRACT LINE TO HIDE LAST LINE
-CLICK SUBTRACT ALL LINES TO HIDE ALL LINES
-WHEN LINE IS SHOWN:
-  CLICK REMOVE LINE TO GET RID OF IT PERMANENTLY
-  CLICK EDIT LINE TO EDIT LINE
+To add lines, you can:
+  Use the textarea to add a single line.
+  Use the textbox to add multiple lines, separated by newlines.
 
-thats it!
+Once lines are added, you can manage them:
+  Click Show New Line to display the lines.
+  Click Subtract Line to hide the last displayed line.
+  Click Subtract All Lines to hide all displayed lines.
+
+When a line is shown:
+  Click Remove Line to delete it permanently.
+  Click Edit Line to modify it.
