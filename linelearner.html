@@ -1,0 +1,172 @@
+<html>
+  <head>
+    <style>
+      input,
+      textarea {
+        border: 2px solid transparent;
+        outline: none;
+        border-bottom: 2px solid #3f3f3f;
+        caret-color: #3f3f3f;
+        background-color: #212121;
+        padding: 5px;
+        transition: 0.5s linear;
+        font-family: monospace;
+        letter-spacing: 1px;
+      }
+
+      input:focus,
+      textarea:focus {
+        border: 2px solid #fa4753;
+        caret-color: #fa4753;
+        color: #fa4753;
+        box-shadow: 4px 4px 10px #070707;
+      }
+
+      input:focus::placeholder,
+      textarea:focus::placeholder {
+        color: #fa4753;
+      }
+      button {
+        font-family: monospace;
+        color: #fa4753;
+        background-color: #212121;
+        cursor: pointer;
+        border-width: 0;
+        border-radius: 0.5em;
+        margin: 0;
+        padding: 8px 12px;
+      }
+      body {
+        margin-left: 5px;
+      }
+      * {
+        font-family: monospace;
+        color: #fa4753;
+        background-color: black;
+        margin: 2px;
+      }
+      .deleteline {
+        margin-left: 5px;
+      }
+      .changeline {
+        margin-left: 5px;
+      }
+      .footer {
+        font-size: 7px;
+      }
+      textarea {
+        margin-bottom: 5px;
+      }
+    </style>
+    <title>LineLearner Basic</title>
+  </head>
+  <body>
+    <noscript>Javascript is required to run this application.</noscript>
+    <span id="text"></span>
+    <br />
+    <br />
+    <button id="new">Show new line</button>
+    <button id="sub">Subtract line</button>
+    <button id="suball">Subtract All Lines</button>
+    <div>
+      <input
+        type="text"
+        placeholder="Some witty line goes here"
+        id="line"
+        size="50"
+      />
+      <button id="addline">Add Line</button> <br />
+      <textarea
+        id="lines"
+        style="width: 413px; height: 126px; display: block"
+      ></textarea>
+      <button id="addbig">Add Lines (seperate by newline)</button>
+    </div>
+    <br />
+    <p class="footer">
+      copyright 2024 under
+      <a href="https://www.gnu.org/licenses/gpl-3.0.en.html#license-text"
+        >GNU GPL</a
+      >
+    </p>
+    <script>
+      var lines = [];
+      var linesshown = [];
+      var text = document.getElementById("text");
+      var lineadder = document.getElementById("line");
+      var linesadder = document.getElementById("lines");
+
+      function updatespan() {
+        let result = "";
+        for (let i = 0; i < linesshown.length; i++) {
+          if (i == linesshown.length) {
+            result +=
+              linesshown[i] +
+              ' <button class="changeline" onclick="askForChange(' +
+              i +
+              ')">Change line</button>' +
+              '<button class="deleteline" onclick="deleteLine(' +
+              i +
+              ')">Delete line</button>';
+            text.innerHTML = result;
+            return;
+          }
+          result +=
+            linesshown[i] +
+            '<button class="changeline" onclick="askForChange(' +
+            i +
+            ')">Change line</button>' +
+            '<button class="deleteline" onclick="deleteLine(' +
+            i +
+            ')">Delete line</button>' +
+            "<br>";
+        }
+        text.innerHTML = result;
+      }
+      function deleteLine(index) {
+        lines.splice(index, 1);
+        linesshown.splice(index, 1);
+        updatespan();
+      }
+      function askForChange(index) {
+        lines[index] = prompt("What would you like to change the line to?");
+        linesshown[index] = lines[index];
+        updatespan();
+      }
+      document.getElementById("addbig").addEventListener("click", function () {
+        var inputLines = linesadder.value.split("\n");
+        for (let index = 0; index < inputLines.length; index++) {
+          lines.push(inputLines[index]);
+        }
+        updatespan();
+        linesadder.value = "";
+      });
+      document.getElementById("new").addEventListener("click", function () {
+        if (linesshown.length == lines.length) {
+          return;
+        }
+        linesshown.push(lines[linesshown.length]);
+        updatespan();
+      });
+      document.getElementById("sub").addEventListener("click", function () {
+        if (linesshown.length == 0) {
+          return;
+        }
+        linesshown.pop();
+        updatespan();
+      });
+      document.getElementById("suball").addEventListener("click", function () {
+        if (linesshown.length == 0) {
+          return;
+        }
+        linesshown = [];
+        updatespan();
+      });
+      document.getElementById("addline").addEventListener("click", function () {
+        lines.push(line.value);
+        updatespan();
+        line.value = "";
+      });
+    </script>
+  </body>
+</html>
